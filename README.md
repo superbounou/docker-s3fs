@@ -1,7 +1,7 @@
 S3FS in Docker
 ==============
 
-This repository provides an image to
+This repository contains a Docker image that allows you to mount an S3 bucket.
 
 # Requirements
 

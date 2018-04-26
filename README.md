@@ -9,3 +9,15 @@ This repository provides an image to
 * docker-compose ;
 
 # Usage
+
+Build the image :
+
+```
+./build.sh <AWS_ACCESS_ID> <AWS_ACCESS_KEY> <BUCKET_NAME>
+```
+
+Launch it :
+
+```
+./run.sh
+```

@@ -21,3 +21,5 @@ Launch it :
 ```
 ./run.sh
 ```
+
+The default mount point is `/mnt/bucket`

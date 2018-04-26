@@ -1,6 +1,6 @@
 FROM alpine
 
-MAINTAINER Nicolas Bounoughaz <superbounou@gmail.com>
+LABEL maintainer Nicolas Bounoughaz <superbounou@gmail.com>
 
 ENV VERSION 1.83
 
@@ -9,7 +9,7 @@ RUN	echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositori
     apk upgrade
 
 RUN set -x && \
-    apk add --no-cache \
+    apk add --no-cache -t .deps \
     alpine-sdk \
     automake \
     build-base \
@@ -20,5 +20,14 @@ RUN set -x && \
     curl-dev \
     libxml2-dev
 
-RUN mkdir /usr/src && curl -L https://github.com/s3fs-fuse/s3fs-fuse/archive/v${VERSION}.tar.gz | tar zxv -C /usr/src
-RUN cd /usr/src/s3fs-fuse-${VERSION} && ./autogen.sh && ./configure --prefix=/usr && make && make install
+RUN mkdir /usr/src && \
+    curl -L https://github.com/s3fs-fuse/s3fs-fuse/archive/v${VERSION}.tar.gz | tar zxv -C /usr/src
+RUN cd /usr/src/s3fs-fuse-${VERSION} && \
+    ./autogen.sh && \
+    ./configure --prefix=/usr && \
+    make && \
+    make install
+
+RUN set -x && \
+    rm -rf /var/cache/apk/* && \
+    apk del .deps

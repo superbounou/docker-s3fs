@@ -11,5 +11,5 @@ services:
     devices:
       - /dev/fuse
     volumes:
-      - "./bucket:/mnt/s3fs"
-    command: s3fs -f -o allow_other -o password_file=/etc/passwd_s3,use_cache=/tmp ${S3_BUCKET_NAME} /mnt/bucket
+      - "./bucket:/mnt/bucket"
+    command: s3fs -f -o allow_other -o passwd_file=/etc/passwd-s3 -o use_cache=/tmp ${S3_BUCKET_NAME} /mnt/bucket

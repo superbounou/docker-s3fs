@@ -31,7 +31,7 @@ RUN cd /usr/src/s3fs-fuse-${VERSION} && \
     make && \
     make install
 
-RUN echo ${ACCESSID}:${ACCESSKEY} > /etc/passwd-s3
+RUN echo ${ACCESSID}:${ACCESSKEY} > /etc/passwd-s3 && chmod 400 /etc/passwd-s3
 
 RUN mkdir /mnt/bucket
 

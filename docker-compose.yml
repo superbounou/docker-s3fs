@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  s3fs:
+    image: docker-s3fs:alpine
+    cap_add:
+      - MKNOD
+      - SYS_ADMIN
+    security_opt:
+      - apparmor:unconfined
+    devices:
+      - /dev/fuse
+    volumes:
+      - "./bucket:/mnt/s3fs"
+    command: s3fs -f -o allow_other -o password_file=/etc/passwd_s3,use_cache=/tmp ${S3_BUCKET_NAME} /mnt/bucket

@@ -4,6 +4,9 @@ LABEL maintainer Nicolas Bounoughaz <superbounou@gmail.com>
 
 ENV VERSION 1.83
 
+ARG ACCESSID
+ARG ACCESSKEY
+
 RUN	echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
     apk update && \
     apk upgrade
@@ -28,6 +31,8 @@ RUN cd /usr/src/s3fs-fuse-${VERSION} && \
     make && \
     make install
 
-RUN set -x && \
-    rm -rf /var/cache/apk/* && \
-    apk del .deps
+RUN echo ${ACCESSID}:${ACCESSKEY} > /etc/passwd-s3
+
+RUN mkdir /mnt/bucket
+
+CMD ["/bin/sh"]
